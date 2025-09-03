@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>She-Shed Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7e9e3;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="relative w-full max-w-4xl p-8 bg-white rounded-2xl shadow-xl flex flex-col md:flex-row items-center">
+        <!-- Message Box -->
+        <div id="messageBox" class="absolute top-4 left-1/2 -translate-x-1/2 p-3 rounded-lg bg-green-500 text-white text-center opacity-0 transition-opacity duration-300 pointer-events-none">
+            
+        </div>
+
+        <!-- Left side: Image and Women's Safety Message -->
+        <div class="md:w-1/2 w-full p-4 flex flex-col items-center justify-center">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2 text-center">Your Safe Space. Your She-Shed.</h1>
+            <p class="text-gray-600 mb-6 text-center">
+                We are committed to providing a secure and empowering environment for all our users.
+            </p>
+            <!-- A placeholder image for women's safety and empowerment. -->
+            <img src="https://placehold.co/600x400/f9a8d4/881337?text=Empowerment+%26+Safety" alt="Women's empowerment and safety" class="w-full rounded-xl mb-4 shadow-md">
+            <p class="text-sm text-gray-500 text-center">
+                This image represents our commitment to creating a safe and empowering community for women.
+            </p>
+        </div>
+
+        <!-- Right side: Login Form -->
+        <div class="md:w-1/2 w-full p-4">
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner w-full">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Log In to Your She-Shed</h2>
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                        <input type="text" id="username" name="username" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="password" name="password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500">
+                            <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
+                        </div>
+                        <div class="text-sm">
+                            <a href="#" class="font-medium text-pink-600 hover:text-pink-500">Forgot your password?</a>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-all" >
+                            Log in
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            
+            // Get form values
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation
+            if (username && password) {
+                // Display a success message
+                showMessage('Login successful!', 'green');
+                
+
+                // You would typically handle the login process here, e.g., send data to a server
+                console.log('Logging in with:', { username, password });
+                window.location.href="second.html"
+            } else {
+                // Display an error message
+                showMessage('Please enter both a username and a password.', 'red');
+            }
+        });
+
+        /**
+         * Displays a message box with a given message and color.
+         * @param {string} message - The message to display.
+         * @param {string} color - The color for the message box background ('green' or 'red').
+         */
+        function showMessage(message, color) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            
+            // Set color based on input
+            if (color === 'red') {
+                messageBox.classList.remove('bg-green-500');
+                messageBox.classList.add('bg-red-500');
+            } else {
+                messageBox.classList.remove('bg-red-500');
+                messageBox.classList.add('bg-green-500');
+            }
+
+            messageBox.classList.remove('opacity-0');
+            messageBox.classList.add('opacity-100');
+            messageBox.style.pointerEvents = 'auto';
+
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                messageBox.classList.remove('opacity-100');
+                messageBox.classList.add('opacity-0');
+                messageBox.style.pointerEvents = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
